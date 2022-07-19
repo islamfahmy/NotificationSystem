@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	observer "main/obserever"
+	saveAgent "main/storage"
 	subject "main/subjects"
 
 	"github.com/spf13/viper"
@@ -51,7 +52,20 @@ func testEmail() {
 	subj.Notify()
 
 }
+func testSave() {
+	subj := subject.CreateBasic("subj 1")
+
+	obs1 := observer.CreatePrint(1)
+	obs2 := observer.CreateEmail(2, "fakemail.com", "fakepassword", "email@test", "email2@test")
+
+	subj.Register(obs1)
+	subj.Register(obs2)
+
+	a := saveAgent.CreateJsonSaveAgent()
+	subj.SaveObservers(a, "observers")
+}
 func main() {
-	testPrint()
-	// testEmail()
+
+	testSave()
+
 }

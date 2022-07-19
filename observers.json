@@ -1,0 +1,12 @@
+[
+ {
+  "id": "1",
+  "typeKey": "1"
+ },
+ {
+  "id": "2",
+  "reciverEmails": "[email@test email2@test]",
+  "senderEmail": "fakemail.com",
+  "typeKey": "2"
+ }
+]

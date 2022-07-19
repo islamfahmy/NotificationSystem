@@ -44,3 +44,12 @@ func (b *basic) Notify() {
 	}
 	fmt.Println("waiting for all observers to finish")
 }
+
+func (b *basic) SaveObservers(s saveAgent, fileName string) error { //save the observers to a file
+
+	err := s.Save(b.observers, fileName)
+	if err != nil {
+		return err
+	}
+	return nil
+}

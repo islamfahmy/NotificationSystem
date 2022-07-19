@@ -1,6 +1,7 @@
 package observer
 
 import (
+	"fmt"
 	"log"
 	"net/smtp"
 	"sync"
@@ -27,6 +28,16 @@ func CreateEmail(id int, email, password string, emails ...string) *emailObserve
 		auth:          auth,
 	}
 }
+
+func (e *emailObserver) Export() map[string]string {
+	return map[string]string{
+		"id":            fmt.Sprintf("%d", e.id),
+		"senderEmail":   e.senderEmail,
+		"reciverEmails": fmt.Sprintf("%v", e.reciverEmails),
+		"typeKey":       e.getType(),
+	}
+}
+
 func (e *emailObserver) AddEmail(s string) {
 	e.reciverEmails = append(e.reciverEmails, s)
 }
@@ -42,4 +53,7 @@ func (e *emailObserver) Update(wg *sync.WaitGroup, s string) {
 }
 func (e *emailObserver) GetID() int {
 	return e.id
+}
+func (e *emailObserver) getType() string {
+	return "2"
 }
