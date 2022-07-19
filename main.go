@@ -10,12 +10,12 @@ import (
 )
 
 func testPrint() {
-	obs1 := observer.CreatePrint(1)
-	obs2 := observer.CreatePrint(2)
-	obs3 := observer.CreatePrint(3)
-	obs4 := observer.CreatePrint(4)
+	obs1 := observer.CreatePrintObservable(1)
+	obs2 := observer.CreatePrintObservable(2)
+	obs3 := observer.CreatePrintObservable(3)
+	obs4 := observer.CreatePrintObservable(4)
 
-	subj := subject.CreateBasic("subj 1")
+	subj := subject.CreateBasicSubject("subj 1")
 	subj.Register(obs1)
 	subj.Register(obs2)
 	subj.Register(obs3)
@@ -46,17 +46,17 @@ func testEmail() {
 		log.Fatalf("password not set")
 		return
 	}
-	obs1 := observer.CreateEmail(1, email, password)
-	subj := subject.CreateBasic("subj 1")
+	obs1 := observer.CreateEmailObservable(1, email, password)
+	subj := subject.CreateBasicSubject("subj 1")
 	subj.Register(obs1)
 	subj.Notify()
 
 }
 func testSave() {
-	subj := subject.CreateBasic("subj 1")
+	subj := subject.CreateBasicSubject("subj 1")
 
-	obs1 := observer.CreatePrint(1)
-	obs2 := observer.CreateEmail(2, "fakemail.com", "fakepassword", "email@test", "email2@test")
+	obs1 := observer.CreatePrintObservable(1)
+	obs2 := observer.CreateEmailObservable(2, "fakemail.com", "fakepassword", "email@test", "email2@test")
 
 	subj.Register(obs1)
 	subj.Register(obs2)

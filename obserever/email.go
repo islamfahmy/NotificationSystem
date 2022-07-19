@@ -17,7 +17,7 @@ type emailObserver struct {
 var smtpHost = "smtp.gmail.com"
 var smtpPort = "587"
 
-func CreateEmail(id int, email, password string, emails ...string) *emailObserver {
+func CreateEmailObservable(id int, email, password string, emails ...string) *emailObserver {
 	// Create authentication
 	auth := smtp.PlainAuth("", email, password, smtpHost)
 

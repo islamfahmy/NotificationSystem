@@ -11,7 +11,7 @@ type print struct {
 	id int
 }
 
-func CreatePrint(id int) *print {
+func CreatePrintObservable(id int) *print {
 	return &print{
 		id: id,
 	}

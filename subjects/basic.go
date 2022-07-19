@@ -11,7 +11,7 @@ type basic struct {
 	name      string // name of the subject
 }
 
-func CreateBasic(name string) *basic {
+func CreateBasicSubject(name string) *basic {
 	return &basic{
 		observers: make(map[int]Observer),
 		name:      name,
