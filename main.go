@@ -1,12 +1,14 @@
 package main
 
 import (
+	"log"
 	observer "main/obserever"
 	subject "main/subjects"
+
+	"github.com/spf13/viper"
 )
 
-func main() {
-
+func testPrint() {
 	obs1 := observer.CreatePrint(1)
 	obs2 := observer.CreatePrint(2)
 	obs3 := observer.CreatePrint(3)
@@ -20,4 +22,36 @@ func main() {
 	for {
 		subj.Notify()
 	}
+
+}
+func testEmail() {
+	viper.AddConfigPath(".")
+	viper.SetConfigName("config") // Register config file name (no extension)
+	viper.SetConfigType("json")   // Look for specific type
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatalf("Error while reading config file %s", err)
+		return
+	}
+	email, ok := viper.Get("email").(string)
+	if !ok {
+		log.Fatalf("Email not set")
+		return
+	}
+	password, ok := viper.Get("password").(string)
+
+	if !ok {
+		log.Fatalf("password not set")
+		return
+	}
+	obs1 := observer.CreateEmail(1, email, password)
+	subj := subject.CreateBasic("subj 1")
+	subj.Register(obs1)
+	subj.Notify()
+
+}
+func main() {
+	testPrint()
+	// testEmail()
 }
